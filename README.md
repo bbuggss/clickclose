@@ -1,4 +1,4 @@
-# Vhira — your website (plain HTML/CSS, yours to edit)
+# ClickClose — your website (plain HTML/CSS, yours to edit)
 
 This is your full site as editable code. No Framer, no build tools, no lock-in.
 Open any `.html` file in a browser to preview it. Edit in any text editor (VS Code is great).
@@ -14,7 +14,7 @@ Open any `.html` file in a browser to preview it. Edit in any text editor (VS Co
 - **Colors & fonts:** top of `styles.css`, in the `:root` block. Change the hex values once.
 - **Text:** just edit the words inside each `.html` file. The nav and footer are copied into
   every page — if you change a nav link, change it in all four files (search for `<nav` and `<footer`).
-- **Email address:** replace `hello@vhira.co` everywhere (find-and-replace across all files).
+- **Email address:** replace `hello@clickclose.com` everywhere (find-and-replace across all files).
 
 ## Making the contact form actually collect leads
 Right now the form opens the visitor's email app with everything pre-filled — works with zero setup.
