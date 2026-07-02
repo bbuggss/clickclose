@@ -1,36 +1,40 @@
-# ClickClose — your website (plain HTML/CSS, yours to edit)
+# ClickClose — your website (plain HTML/CSS/JS, yours to edit)
 
-This is your full site as editable code. No Framer, no build tools, no lock-in.
-Open any `.html` file in a browser to preview it. Edit in any text editor (VS Code is great).
+Editable code for your site. No Framer, no build tools, no lock-in.
+Open any `.html` file in a browser to preview. Edit in any text editor (VS Code recommended).
 
 ## Files
 - `index.html` — Home
 - `services.html` — Services & pricing
+- `demos.html` — Live demos: AI chatbot, booking, SEO preview, ROI calculator
 - `about.html` — About
-- `contact.html` — Contact (with working form)
-- `styles.css` — All design/colors/fonts (edit once, applies to every page)
+- `contact.html` — Contact (working form)
+- `styles.css` — Reference copy of the design system (the styles are ALSO inlined
+  into each HTML file, so each page renders on its own with no dependency)
 
-## Editing the basics
-- **Colors & fonts:** top of `styles.css`, in the `:root` block. Change the hex values once.
-- **Text:** just edit the words inside each `.html` file. The nav and footer are copied into
-  every page — if you change a nav link, change it in all four files (search for `<nav` and `<footer`).
-- **Email address:** replace `hello@clickclose.com` everywhere (find-and-replace across all files).
+## Live/interactive pieces
+- **AI chatbot** (bottom-right, every page): answers from a built-in knowledge base —
+  no API key, no cost. To upgrade to a real Claude-API bot later, see the comment at the
+  top of the chat script in each file and route it through your own backend. Never put an
+  API key in these files.
+- **Booking** (demos.html): full flow that ends with a real .ics calendar invite + email.
+- **SEO preview** (demos.html): live Google-result + checklist.
+- **ROI calculator** (demos.html, section id="roisec"): to REMOVE it, delete the whole
+  `<section id="roisec">...</section>` block. Nothing else depends on it.
 
-## Making the contact form actually collect leads
-Right now the form opens the visitor's email app with everything pre-filled — works with zero setup.
-To collect submissions automatically, pick one:
-- **Formspree (easiest):** create a form at formspree.io, then in `contact.html` change the form to
-  `<form action="https://formspree.io/f/yourID" method="POST">` and delete the JS submit handler at the bottom.
-- **GoHighLevel:** embed your GHL form, or point the form `action` at your GHL webhook.
-- **Booking link:** in `contact.html`, replace the `mailto:` on the "Request a time" button with your
-  Calendly or GoHighLevel scheduling link.
+## Make it yours before launch
+- Replace `hello@clickclose.com` everywhere with your real inbox (find-and-replace).
+- Swap the booking link / add a Calendly or GoHighLevel link where noted in contact.html.
+- Replace the 3 placeholder testimonials on index.html with real ones.
+- Set your real domain in the JSON-LD `url` in each file's <head> for SEO.
 
-## Putting it online (free options)
-1. **Netlify Drop** — go to app.netlify.com/drop and drag this whole folder in. Live in seconds.
-2. **GitHub Pages** — push the folder to a repo, enable Pages in settings.
-3. **Your own domain** — point it at whichever host above; both support custom domains free.
+## Connect the contact form (optional)
+Right now it opens the visitor's email pre-filled (zero setup). To auto-collect leads:
+- Formspree: change the form to `action="https://formspree.io/f/yourID" method="POST"` and
+  remove the JS submit handler.
+- GoHighLevel: embed your GHL form or point the form action at your GHL webhook.
 
-## Notes
-- Fonts load from Google Fonts (Bricolage Grotesque + Inter) — needs internet on first load.
-- Fully responsive, keyboard-accessible, and respects reduced-motion settings.
-- The animated "signal ripple" in the hero is pure CSS — no images, nothing to break.
+## Put it online (free)
+1. Netlify Drop — drag this folder onto app.netlify.com/drop. Live in seconds.
+2. GitHub Pages — push to a repo, enable Pages.
+Both support a free custom domain.

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Contact — ClickClose</title>
-<meta name="description" content="Book a free discovery call with ClickClose, a Hawaii digital agency serving Oahu small businesses." />
-<meta property="og:title" content="Contact — ClickClose" />
-<meta property="og:description" content="Book a free discovery call with ClickClose, a Hawaii digital agency serving Oahu small businesses." />
+<title>Live Demos — ClickClose</title>
+<meta name="description" content="Try ClickClose's AI chatbot, online booking, and local SEO tools live — the same systems we build for your business." />
+<meta property="og:title" content="Live Demos — ClickClose" />
+<meta property="og:description" content="Try ClickClose's AI chatbot, online booking, and local SEO tools live — the same systems we build for your business." />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -221,9 +221,9 @@ a:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible,bu
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
-      <a href="demos.html">Live Demos</a>
+      <a href="demos.html" aria-current="page">Live Demos</a>
       <a href="about.html">About</a>
-      <a href="contact.html" aria-current="page">Contact</a>
+      <a href="contact.html">Contact</a>
     </div>
     <div class="nav-cta">
       <a class="btn btn-primary" href="contact.html">Book a Free Call</a>
@@ -240,34 +240,102 @@ a:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible,bu
 <header class="hero">
   <div class="signal" aria-hidden="true"><span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="core"></span></div>
   <div class="wrap hero-inner">
-    <span class="eyebrow">Contact</span>
-    <h1>Let&rsquo;s talk about your business.</h1>
-    <p class="lead">Tell us what you&rsquo;re trying to fix or grow. We&rsquo;ll get back to you with a clear, no-pressure plan &mdash; usually within one business day.</p>
+    <span class="eyebrow">Live demos &mdash; try everything</span>
+    <h1>Don&rsquo;t take our word for it. <span class="glow">Test it.</span></h1>
+    <p class="lead">Everything below is the real thing we build into your site. Chat with our AI assistant (bottom-right), book a time on a working calendar, and watch your Google result build itself as you type.</p>
   </div>
 </header>
-<section class="section" id="book"><div class="wrap">
-  <div class="grid grid-2" style="gap:48px;align-items:start">
-    <div class="reveal">
-      <span class="eyebrow">Send a message</span>
-      <h2 style="font-size:clamp(24px,3.5vw,34px);margin-top:14px">Start the conversation</h2>
-      <form class="form" id="contactForm" style="margin-top:24px">
-        <div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" required placeholder="First and last" /></div>
-        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@business.com" /></div>
-        <div class="field"><label for="business">Business name</label><input id="business" name="business" type="text" placeholder="Your business" /></div>
-        <div class="field"><label for="service">What do you need?</label>
-          <select id="service" name="service"><option>Website</option><option>Booking system</option><option>AI chatbot</option><option>Automation</option><option>Local SEO / Google profile</option><option>Not sure yet &mdash; let&rsquo;s talk</option></select></div>
-        <div class="field"><label for="message">Tell us a bit more</label><textarea id="message" name="message" placeholder="What&rsquo;s going on with your business online right now?"></textarea></div>
-        <button class="btn btn-primary" type="submit">Send message &rarr;</button>
-        <p class="form-note" id="formNote">Opens your email app with the message ready to send.</p>
-      </form>
+
+<!-- AI CHATBOT -->
+<section class="section"><div class="wrap">
+  <div class="section-head reveal"><span class="eyebrow">1 &middot; AI chatbot</span><h2>An assistant that answers customers 24/7.</h2><p class="lead" style="margin-top:14px">Tap the chat bubble in the bottom-right corner. Ask it about pricing, booking, SEO, or your timeline &mdash; it answers instantly, trained on the business. Yours would be trained on <em>your</em> services, hours, and FAQs.</p></div>
+  <div class="grid grid-3">
+    <div class="card reveal"><div class="num">Answers</div><h3>Common questions</h3><p>Hours, pricing, services, location &mdash; handled without you lifting a finger.</p></div>
+    <div class="card reveal"><div class="num">Captures</div><h3>Leads, day or night</h3><p>Turns a 2am visitor into a booked lead instead of a bounce.</p></div>
+    <div class="card reveal"><div class="num">Books</div><h3>Straight to your calendar</h3><p>Hands customers off to booking the moment they&rsquo;re ready.</p></div>
+  </div>
+  <p style="margin-top:24px"><button class="btn btn-primary" onclick="document.getElementById('chatLauncher').click()">Open the chatbot &rarr;</button></p>
+</div></section>
+
+<!-- BOOKING -->
+<section class="section" id="bookingsec" style="background:var(--ink-2);border-block:1px solid var(--line)"><div class="wrap">
+  <div class="section-head reveal"><span class="eyebrow">2 &middot; Online booking</span><h2>A real booking flow, start to finish.</h2><p class="lead" style="margin-top:14px">Pick a service, choose a date and time on a live calendar, and confirm. You&rsquo;ll get a working calendar invite at the end &mdash; the same experience your customers would have.</p></div>
+  <div class="reveal" id="booking-anchor"><a id="booking"></a><div class="booking" id="booking">
+  <div class="steps"><div class="step-dot active" data-s="1"></div><div class="step-dot" data-s="2"></div><div class="step-dot" data-s="3"></div><div class="step-dot" data-s="4"></div></div>
+  <div id="bookStage"></div>
+</div></div>
+</div></section>
+
+<!-- SEO -->
+<section class="section" id="seosec"><div class="wrap">
+  <div class="section-head reveal"><span class="eyebrow">3 &middot; Local SEO</span><h2>Watch your Google result come to life.</h2><p class="lead" style="margin-top:14px">Type a business name, city, and what you do. The search result and map listing update live &mdash; this is how we shape the way nearby customers find you.</p></div>
+  <a id="seo"></a>
+  <div class="seo-tool reveal">
+    <div>
+      <div class="form" style="max-width:none;margin-bottom:18px">
+        <div class="field"><label>Business name</label><input id="seoBiz" value="Kapolei Auto Care" placeholder="Your business"></div>
+        <div class="field"><label>City</label><input id="seoCity" value="Kapolei" placeholder="City"></div>
+        <div class="field"><label>What you do (keyword)</label><input id="seoKw" value="auto repair" placeholder="e.g. plumbing, lunch plates, haircuts"></div>
+      </div>
+      <div class="serp">
+        <div class="crumb"><span class="fav"></span><span id="serpUrl">kapoleiautocare.com</span></div>
+        <div class="title" id="serpTitle">Title</div>
+        <div class="desc" id="serpDesc">Description</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; <small>4.9 &middot; 87 Google reviews</small></div>
+      </div>
+      <div class="localcard">
+        <div class="pin">&#128205;</div>
+        <div><div class="b" id="lpName">Business</div><div class="m" id="lpMeta">City, HI</div></div>
+      </div>
     </div>
-    <div class="reveal">
-      <div class="card" style="margin-bottom:18px"><h3>Book a free call</h3><p style="margin:10px 0 18px">A 20-minute discovery call &mdash; no pressure, no pitch deck. Pick a time on our live booking demo.</p><a class="btn btn-ghost" href="demos.html#booking">Pick a time &rarr;</a></div>
-      <div class="card" style="margin-bottom:18px"><h3>Email</h3><p style="margin-top:8px"><a href="mailto:hello@clickclose.co" style="color:var(--teal)">hello@clickclose.co</a></p></div>
-      <div class="card"><h3>Service area</h3><p style="margin-top:8px">Based on Oahu, serving small businesses across Hawaii. In-person where it helps, remote where it&rsquo;s faster.</p></div>
+    <div>
+      <h3 style="font-size:20px;margin-bottom:8px">What we optimize</h3>
+      <p style="color:var(--mist);font-size:14.5px;margin-bottom:10px">Every box below is already done on this very page &mdash; the same checklist we run for your business.</p>
+      <div class="checklist">
+        <div class="item"><span class="tick">&#10003;</span><span id="ckTitle"><b>Local keyword in title</b><small>Matches what people actually search</small></span></div>
+        <div class="item"><span class="tick">&#10003;</span><span><b>Meta description written</b><small>The summary that appears under your link</small></span></div>
+        <div class="item"><span class="tick">&#10003;</span><span><b>Google Business Profile</b><small>Map listing, hours, photos, reviews</small></span></div>
+        <div class="item"><span class="tick">&#10003;</span><span><b>Structured data (LocalBusiness)</b><small>Helps Google show rich results &amp; the map pack</small></span></div>
+        <div class="item"><span class="tick">&#10003;</span><span><b>Mobile-friendly &amp; fast</b><small>Most local searches happen on phones</small></span></div>
+        <div class="item"><span class="tick">&#10003;</span><span><b>Review generation</b><small>More 5-star reviews, automatically requested</small></span></div>
+      </div>
     </div>
   </div>
 </div></section>
+
+<!-- ===== ROI CALCULATOR (added push — delete this whole section to revert) ===== -->
+<section class="section" id="roisec"><div class="wrap">
+  <div class="section-head reveal"><span class="eyebrow">4 &middot; ROI calculator</span><h2>See what it pays back.</h2><p class="lead" style="margin-top:14px">Plug in what one new customer is worth to you. This shows what the system needs to bring in to pay for itself &mdash; usually just a job or two a month.</p></div>
+  <div class="seo-tool reveal">
+    <div>
+      <div class="form" style="max-width:none">
+        <div class="field"><label>Average value of one new customer ($)</label><input id="roiVal" type="number" value="250" min="1"></div>
+        <div class="field"><label>New customers per month you expect</label><input id="roiCust" type="number" value="3" min="0"></div>
+        <div class="field"><label>Your plan</label>
+          <select id="roiPlan">
+            <option value="199">Presence Pack &mdash; $199/mo</option>
+            <option value="299">Presence Pack (AI) &mdash; $299/mo</option>
+            <option value="399" selected>Growth Engine &mdash; $399/mo</option>
+            <option value="599">Growth Engine (AI) &mdash; $599/mo</option>
+            <option value="699">Full Stack AI &mdash; $699/mo</option>
+            <option value="999">Full Stack AI (AI) &mdash; $999/mo</option>
+          </select></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="background:linear-gradient(180deg,rgba(52,214,192,.08),var(--ink-2))">
+        <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mist)">Extra revenue / month</span><b id="roiRev" style="color:var(--gold);font-family:var(--display)">$750</b></div>
+        <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mist)">Your plan cost</span><b id="roiCost" style="font-family:var(--display)">$399</b></div>
+        <div style="display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mist)">Net gain / month</span><b id="roiNet" style="color:var(--teal);font-family:var(--display)">$351</b></div>
+        <div style="display:flex;justify-content:space-between;padding:15px 0 6px;align-items:center"><span style="color:var(--mist)">Return on investment</span><b id="roiPct" style="color:var(--coral);font-family:var(--display);font-size:24px">88%</b></div>
+        <p id="roiPay" class="form-note" style="margin-top:10px">Pays for itself after about 2 new customers a month.</p>
+      </div>
+      <p class="form-note" style="margin-top:12px">Estimate only &mdash; real results depend on your offer, follow-up, and market. Numbers are illustrative, not a guarantee.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="section" style="background:var(--ink-2);border-block:1px solid var(--line)"><div class="wrap"><div class="cta-band reveal"><h2>Want this for your business?</h2><p>This is exactly what we&rsquo;d set up for you &mdash; trained on your services, wired to your calendar, tuned to your local search.</p><a class="btn btn-primary" href="contact.html">Book a free call</a></div></div></section>
 <footer class="footer"><div class="wrap">
   <div class="footer-grid">
     <div><h4><span class="brand"><span class="dot"></span>ClickClose</span></h4>
@@ -414,15 +482,150 @@ function answer(text){
   input.addEventListener('keydown',function(e){if(e.key==='Enter')send()});
 })();
 
-var TO="hello@clickclose.co";
-var cf=document.getElementById('contactForm');
-if(cf)cf.addEventListener('submit',function(e){
-  e.preventDefault();
-  var v=function(id){return encodeURIComponent(document.getElementById(id).value||'')};
-  var subject=encodeURIComponent('New inquiry from '+(document.getElementById('name').value||'website'));
-  var body='Name: '+v('name')+'%0D%0AEmail: '+v('email')+'%0D%0ABusiness: '+v('business')+'%0D%0AService: '+v('service')+'%0D%0A%0D%0AMessage:%0D%0A'+v('message');
-  window.location.href='mailto:'+TO+'?subject='+subject+'&body='+body;
-});
+(function(){
+  var stage=document.getElementById('bookStage');if(!stage)return;
+  var dots=document.querySelectorAll('.step-dot');
+  var SERVICES=[['Free discovery call','20 min · no pressure'],['Website build','Get a quote'],['AI chatbot setup','24/7 customer answers'],['Booking system','Stop the phone tag'],['Automation / follow-ups','Save hours weekly'],['Local SEO & Google','Get found nearby']];
+  var SLOTS=['9:00 AM','10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM'];
+  var st={service:null,date:null,time:null,name:'',email:'',note:''};
+  var view=new Date();view.setDate(1);
+  var today=new Date();today.setHours(0,0,0,0);
+  function setStep(n){dots.forEach(function(d){d.classList.toggle('active',+d.dataset.s<=n)})}
+  function esc(s){return (s||'').replace(/[<>&]/g,function(c){return{'<':'&lt;','>':'&gt;','&':'&amp;'}[c]})}
+
+  function renderService(){
+    setStep(1);
+    var h='<h3>What can we help with?</h3><p class="sub">Pick a service to book a time around.</p><div class="opt-grid">';
+    SERVICES.forEach(function(s,i){h+='<button class="opt'+(st.service===s[0]?' sel':'')+'" data-i="'+i+'">'+s[0]+'<small>'+s[1]+'</small></button>'});
+    h+='</div>';stage.innerHTML=h;
+    stage.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){st.service=SERVICES[+b.dataset.i][0];renderCal()}});
+  }
+  function renderCal(){
+    setStep(2);
+    var y=view.getFullYear(),mo=view.getMonth();
+    var first=new Date(y,mo,1).getDay();var days=new Date(y,mo+1,0).getDate();
+    var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var prevDisabled=(y===today.getFullYear()&&mo<=today.getMonth())||y<today.getFullYear();
+    var h='<h3>Pick a date</h3><p class="sub">For: <b style="color:var(--gold)">'+esc(st.service)+'</b></p>';
+    h+='<div class="cal-head"><button id="calPrev"'+(prevDisabled?' disabled':'')+'>&lsaquo;</button><div class="mlabel">'+months[mo]+' '+y+'</div><button id="calNext">&rsaquo;</button></div>';
+    h+='<div class="cal-dow"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div><div class="cal-grid">';
+    for(var i=0;i<first;i++)h+='<div class="cal-cell muted"></div>';
+    for(var d=1;d<=days;d++){
+      var cur=new Date(y,mo,d);var dow=cur.getDay();
+      var past=cur<today;var sunday=(dow===0);
+      var avail=!past&&!sunday;
+      var sel=st.date&&st.date.getTime()===cur.getTime();
+      h+='<div class="cal-cell '+(avail?'avail':'muted')+(sel?' sel':'')+'" data-d="'+d+'">'+d+'</div>';
+    }
+    h+='</div><div class="book-nav"><button class="btn btn-ghost" id="bkBack">&larr; Back</button><span></span></div>';
+    stage.innerHTML=h;
+    var p=document.getElementById('calPrev'),n=document.getElementById('calNext');
+    if(p&&!prevDisabled)p.onclick=function(){view.setMonth(view.getMonth()-1);renderCal()};
+    n.onclick=function(){view.setMonth(view.getMonth()+1);renderCal()};
+    document.getElementById('bkBack').onclick=renderService;
+    stage.querySelectorAll('.cal-cell.avail').forEach(function(c){c.onclick=function(){st.date=new Date(y,mo,+c.dataset.d);renderSlots()}});
+  }
+  function renderSlots(){
+    setStep(3);
+    var opts={weekday:'long',month:'long',day:'numeric'};
+    // mark a couple slots "taken" deterministically for realism
+    var taken=[(st.date.getDate())%7,(st.date.getDate()+3)%7];
+    var h='<h3>Pick a time</h3><p class="sub">'+st.date.toLocaleDateString('en-US',opts)+' · Hawaii time</p><div class="slots">';
+    SLOTS.forEach(function(s,i){var t=taken.indexOf(i)>-1;h+='<button class="slot'+(t?' taken':'')+(st.time===s?' sel':'')+'"'+(t?' disabled':'')+' data-t="'+s+'">'+s+'</button>'});
+    h+='</div><div class="book-nav"><button class="btn btn-ghost" id="bkBack">&larr; Back</button><span></span></div>';
+    stage.innerHTML=h;
+    document.getElementById('bkBack').onclick=renderCal;
+    stage.querySelectorAll('.slot:not(.taken)').forEach(function(b){b.onclick=function(){st.time=b.dataset.t;renderDetails()}});
+  }
+  function renderDetails(){
+    setStep(4);
+    var h='<h3>Your details</h3><p class="sub">'+esc(st.service)+' · '+st.date.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' · '+st.time+'</p>';
+    h+='<div class="form" style="max-width:none">';
+    h+='<div class="field"><label>Name</label><input id="bkName" value="'+esc(st.name)+'" placeholder="First and last"></div>';
+    h+='<div class="field"><label>Email</label><input id="bkEmail" type="email" value="'+esc(st.email)+'" placeholder="you@business.com"></div>';
+    h+='<div class="field"><label>Anything we should know? (optional)</label><textarea id="bkNote" style="min-height:80px" placeholder="Your business + what you need">'+esc(st.note)+'</textarea></div>';
+    h+='</div><div class="book-nav"><button class="btn btn-ghost" id="bkBack">&larr; Back</button><button class="btn btn-primary" id="bkConfirm">Confirm booking</button></div>';
+    stage.innerHTML=h;
+    document.getElementById('bkBack').onclick=renderSlots;
+    document.getElementById('bkConfirm').onclick=function(){
+      st.name=document.getElementById('bkName').value.trim();
+      st.email=document.getElementById('bkEmail').value.trim();
+      st.note=document.getElementById('bkNote').value.trim();
+      if(!st.name||!st.email){alert('Please add your name and email so we can confirm.');return}
+      renderDone();
+    };
+  }
+  function pad(n){return(n<10?'0':'')+n}
+  function icsDate(d){return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z'}
+  function makeICS(){
+    var h=parseInt(st.time),pm=/PM/.test(st.time);if(pm&&h!==12)h+=12;if(!pm&&h===12)h=0;
+    var start=new Date(st.date);start.setHours(h,parseInt(st.time.split(':')[1])||0,0,0);
+    var end=new Date(start.getTime()+30*60000);
+    var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//ClickClose//Booking//EN','BEGIN:VEVENT',
+      'UID:'+Date.now()+'@clickclose.co','DTSTAMP:'+icsDate(new Date()),'DTSTART:'+icsDate(start),'DTEND:'+icsDate(end),
+      'SUMMARY:ClickClose — '+st.service,'DESCRIPTION:Booking for '+st.name+' ('+st.email+'). Note: '+(st.note||'none'),
+      'LOCATION:Online / Oahu, Hawaii','END:VEVENT','END:VCALENDAR'].join('\r\n');
+    return new Blob([ics],{type:'text/calendar'});
+  }
+  function renderDone(){
+    var dstr=st.date.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+    var h='<div class="book-confirm"><div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#34D6C0" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>';
+    h+='<h3>You\'re booked, '+esc(st.name.split(' ')[0])+'!</h3><p class="sub">A confirmation is on its way. Add it to your calendar below.</p>';
+    h+='<div class="book-summary"><b>Service:</b> '+esc(st.service)+'<br><b>Date:</b> '+dstr+'<br><b>Time:</b> '+st.time+' (Hawaii)<br><b>Email:</b> '+esc(st.email)+'</div>';
+    h+='<div class="book-nav" style="justify-content:center"><button class="btn btn-primary" id="bkICS">Add to calendar</button><button class="btn btn-ghost" id="bkEmailBtn">Email me details</button></div>';
+    h+='<p class="form-note" style="margin-top:16px">Demo booking — this is the same flow we build into your real site, connected to your live calendar.</p>';
+    h+='<button class="chip" id="bkAgain" style="margin-top:14px">Book another</button></div>';
+    stage.innerHTML=h;
+    document.getElementById('bkICS').onclick=function(){
+      var url=URL.createObjectURL(makeICS());var a=document.createElement('a');a.href=url;a.download='clickclose-booking.ics';a.click();URL.revokeObjectURL(url);
+    };
+    document.getElementById('bkEmailBtn').onclick=function(){
+      var sub=encodeURIComponent('ClickClose booking — '+st.service);
+      var bd=encodeURIComponent('Service: '+st.service+'\nDate: '+dstr+'\nTime: '+st.time+' (Hawaii)\nName: '+st.name+'\nEmail: '+st.email+'\nNote: '+(st.note||'none'));
+      window.location.href='mailto:hello@clickclose.co?subject='+sub+'&body='+bd;
+    };
+    document.getElementById('bkAgain').onclick=function(){st={service:null,date:null,time:null,name:'',email:'',note:''};renderService()};
+  }
+  renderService();
+})();
+
+(function(){
+  var biz=document.getElementById('seoBiz'),city=document.getElementById('seoCity'),kw=document.getElementById('seoKw');
+  if(!biz)return;
+  function up(){
+    var b=biz.value.trim()||'Your Business';
+    var c=city.value.trim()||'Honolulu';
+    var k=kw.value.trim()||'services';
+    document.getElementById('serpTitle').textContent=b+' — '+k.charAt(0).toUpperCase()+k.slice(1)+' in '+c+', HI';
+    document.getElementById('serpUrl').textContent=b.toLowerCase().replace(/[^a-z0-9]+/g,'')+'.com';
+    document.getElementById('serpDesc').textContent='Looking for '+k+' in '+c+'? '+b+' is a trusted local business serving '+c+' and nearby areas. Book online, see reviews, and get in touch today.';
+    document.getElementById('lpName').textContent=b;
+    document.getElementById('lpMeta').textContent=c+', HI · Open now · '+k;
+    document.getElementById('ckTitle').innerHTML='Local keyword in title <small>"'+k+' in '+c+'" — exactly what people search</small>';
+  }
+  [biz,city,kw].forEach(function(el){el.addEventListener('input',up)});up();
+})();
+
+/* ROI calculator (added push — remove #roisec section + this block to revert) */
+(function(){
+  var val=document.getElementById('roiVal'),cust=document.getElementById('roiCust'),plan=document.getElementById('roiPlan');
+  if(!val)return;
+  function money(n){return '$'+Math.round(n).toLocaleString()}
+  function up(){
+    var v=Math.max(0,parseFloat(val.value)||0),c=Math.max(0,parseFloat(cust.value)||0),p=parseFloat(plan.value)||0;
+    var rev=v*c,net=rev-p,roi=p>0?(net/p*100):0;
+    document.getElementById('roiRev').textContent=money(rev);
+    document.getElementById('roiCost').textContent=money(p);
+    var netEl=document.getElementById('roiNet');
+    netEl.textContent=(net<0?'-':'')+money(Math.abs(net));
+    netEl.style.color=net>=0?'var(--teal)':'var(--coral)';
+    document.getElementById('roiPct').textContent=Math.round(roi)+'%';
+    var el=document.getElementById('roiPay');
+    if(v<=0){el.textContent='Enter a customer value to see payback.'}
+    else{var n=Math.ceil(p/v);el.textContent='Pays for itself after about '+n+' new customer'+(n===1?'':'s')+' a month.'}
+  }
+  [val,cust,plan].forEach(function(e){e.addEventListener('input',up)});up();
+})();
 </script>
 </body>
 </html>
