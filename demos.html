@@ -9,6 +9,12 @@
 <meta property="og:description" content="Try ClickClose's AI chatbot, online booking, and local SEO tools live — the same systems we build for your business." />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="og-image.png" />
+<meta name="twitter:image" content="og-image.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="icon.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#06141C" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -49,6 +55,9 @@ p{margin:0}
 .nav-inner{max-width:var(--maxw);margin:0 auto;padding:15px var(--pad);display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.01em}
 .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--coral);box-shadow:0 0 10px var(--coral)}
+.brand-logo{height:30px;width:auto;display:block}
+.footer-logo{height:34px;width:auto;margin:0 0 14px}
+@media(max-width:520px){.brand-logo{height:25px}}
 .nav-links{display:flex;align-items:center;gap:26px}
 .nav-links a{color:var(--mist);font-size:15px;font-weight:500;transition:color .15s}
 .nav-links a:hover,.nav-links a[aria-current=page]{color:var(--cloud)}
@@ -120,7 +129,8 @@ p{margin:0}
 .chat-panel{position:fixed;right:22px;bottom:94px;z-index:91;width:min(380px,calc(100vw - 32px));height:min(560px,calc(100vh - 130px));background:var(--ink-2);border:1px solid var(--line);border-radius:20px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.55)}
 .chat-panel.open{display:flex}
 .chat-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px;background:linear-gradient(180deg,rgba(255,107,74,.12),transparent)}
-.chat-head .avatar{width:38px;height:38px;border-radius:50%;background:var(--coral);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;color:#1a0a05}
+.chat-head .avatar{width:38px;height:38px;border-radius:50%;background:var(--coral);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;color:#1a0a05;overflow:hidden}
+.chat-head .avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .chat-head h4{font-family:var(--display);font-size:16px;margin:0;line-height:1.2}
 .chat-head .status{font-size:11.5px;color:var(--teal);display:flex;align-items:center;gap:6px}
 .chat-head .status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal)}
@@ -217,7 +227,7 @@ a:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible,bu
 <body>
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><span class="dot"></span>ClickClose</a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="logo.png" alt="ClickClose" /></a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
@@ -338,7 +348,7 @@ a:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible,bu
 <section class="section" style="background:var(--ink-2);border-block:1px solid var(--line)"><div class="wrap"><div class="cta-band reveal"><h2>Want this for your business?</h2><p>This is exactly what we&rsquo;d set up for you &mdash; trained on your services, wired to your calendar, tuned to your local search.</p><a class="btn btn-primary" href="contact.html">Book a free call</a></div></div></section>
 <footer class="footer"><div class="wrap">
   <div class="footer-grid">
-    <div><h4><span class="brand"><span class="dot"></span>ClickClose</span></h4>
+    <div><img class="footer-logo" src="logo.png" alt="ClickClose" />
       <p>Your one-stop digital shop for websites, booking, automation, chatbots, and local SEO. Clicks that close, made in Hawaii.</p></div>
     <div><div class="col-label">Pages</div>
       <a href="index.html">Home</a><a href="services.html">Services</a><a href="demos.html">Live Demos</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
@@ -354,7 +364,7 @@ a:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible,bu
 </button>
 <div class="chat-panel" id="chatPanel" role="dialog" aria-label="ClickClose assistant">
   <div class="chat-head">
-    <div class="avatar">C</div>
+    <div class="avatar"><img src="icon.png" alt="ClickClose" /></div>
     <div><h4>ClickClose Assistant</h4><div class="status">Online &middot; replies instantly</div></div>
     <button class="chat-close" id="chatClose" aria-label="Close chat">&times;</button>
   </div>
