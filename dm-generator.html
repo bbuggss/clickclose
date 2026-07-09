@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DM Generator — ClickClose (Internal Tool)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#06141C;--ink-2:#0B222E;--ink-3:#103040;--line:#1B3A49;
+  --coral:#FF6B4A;--gold:#FFC15E;--teal:#34D6C0;
+  --cloud:#F3F1EA;--mist:#93AAB3;
+  --display:"Bricolage Grotesque","Inter",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--cloud);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 24px 80px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--coral);box-shadow:0 0 10px var(--coral)}
+h1{font-family:var(--display);font-weight:800;font-size:26px;margin:0}
+.tag{color:var(--mist);font-size:14px;margin:6px 0 28px}
+.tag b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:start}
+@media(max-width:920px){.layout{grid-template-columns:1fr}}
+.card{background:var(--ink-2);border:1px solid var(--line);border-radius:18px;padding:26px}
+.card h2{font-family:var(--display);font-size:18px;margin:0 0 4px;color:var(--coral)}
+.card .sub{color:var(--mist);font-size:13px;margin-bottom:18px}
+.field{margin-bottom:16px}
+.field label{display:flex;align-items:baseline;justify-content:space-between;font-size:13px;font-weight:600;color:var(--mist);margin-bottom:6px}
+.field label .hint{font-weight:400;font-style:italic;color:#5f6f77;font-size:12px}
+.field input,.field textarea,.field select{
+  width:100%;background:var(--ink-3);border:1px solid var(--line);border-radius:10px;
+  padding:11px 13px;color:var(--cloud);font-family:var(--body);font-size:14.5px;
+}
+.field textarea{min-height:64px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(52,214,192,.15)}
+.channel-toggle{display:flex;gap:8px;margin-bottom:18px}
+.channel-toggle button{flex:1;background:var(--ink-3);border:1px solid var(--line);color:var(--mist);padding:10px;border-radius:10px;cursor:pointer;font-family:var(--body);font-weight:600;font-size:13.5px}
+.channel-toggle button.active{background:var(--coral);color:#1a0a05;border-color:var(--coral)}
+.btnrow{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px;padding:12px 20px;border-radius:999px;border:1px solid transparent;cursor:pointer;font-family:var(--body);transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--coral);color:#1a0a05}
+.btn-ghost{background:transparent;color:var(--cloud);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--teal)}
+.btn-small{padding:7px 14px;font-size:12.5px;border-radius:999px}
+.preview{background:var(--ink-3);border:1px solid var(--line);border-radius:14px;padding:20px;white-space:pre-wrap;font-size:15px;line-height:1.65;min-height:160px;color:var(--cloud)}
+.preview.empty{color:var(--mist);font-style:italic}
+.meta-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wordcount{color:var(--mist);font-size:12.5px}
+.copied-flash{color:var(--teal);font-size:12.5px;font-weight:700;opacity:0;transition:opacity .2s}
+.copied-flash.show{opacity:1}
+.history-item{background:var(--ink-3);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.history-head{display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:10px}
+.history-head .bname{font-weight:700;font-size:14.5px;color:var(--cloud)}
+.history-head .when{color:var(--mist);font-size:12px;white-space:nowrap}
+.history-body{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);white-space:pre-wrap;font-size:13.5px;color:var(--mist);display:none}
+.history-body.open{display:block}
+.history-actions{display:flex;gap:8px;margin-top:10px}
+.empty-state{color:var(--mist);font-size:14px;text-align:center;padding:30px 10px}
+.badge{display:inline-block;background:var(--ink);border:1px solid var(--line);color:var(--teal);font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;margin-left:6px;text-transform:uppercase;letter-spacing:.03em}
+.section-title{font-family:var(--display);font-size:16px;color:var(--cloud);margin:0 0 12px;display:flex;align-items:center;justify-content:space-between}
+.stat{color:var(--mist);font-size:12.5px;font-weight:500}
+.stat b{color:var(--gold)}
+footer{margin-top:40px;color:var(--mist);font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><span class="dot"></span><h1>ClickClose</h1></header>
+  <p class="tag">DM / Email Generator &middot; <b>internal tool</b> &mdash; fill in the gaps, generate, copy, send. Nothing here is public.</p>
+
+  <div class="layout">
+    <!-- FORM -->
+    <div class="card">
+      <h2>Build the message</h2>
+      <div class="sub">Fill in what you found on their page. Be specific &mdash; specificity is what makes it land.</div>
+
+      <div class="channel-toggle">
+        <button type="button" class="active" data-ch="DM" onclick="setChannel('DM')">Instagram / FB DM</button>
+        <button type="button" data-ch="Email" onclick="setChannel('Email')">Email</button>
+      </div>
+
+      <div class="field">
+        <label>Their first name <span class="hint">required</span></label>
+        <input id="f_name" placeholder="e.g. Justin">
+      </div>
+      <div class="field">
+        <label>Business name <span class="hint">for your records</span></label>
+        <input id="f_business" placeholder="e.g. Heaven Sent Mobile Auto Detailing">
+      </div>
+      <div class="field">
+        <label>Specific observation <span class="hint">a real detail you found</span></label>
+        <textarea id="f_observation" placeholder="e.g. saw the ceramic coating reviews, that work looks incredible for a mobile setup"></textarea>
+      </div>
+      <div class="field">
+        <label>Genuine compliment <span class="hint">tied to the observation &mdash; can combine with above</span></label>
+        <textarea id="f_compliment" placeholder="e.g. that kind of consistency at 71 reviews takes real skill"></textarea>
+      </div>
+      <div class="field">
+        <label>The gap <span class="hint">stated as fact, not criticism</span></label>
+        <textarea id="f_gap" placeholder="e.g. everything runs through text messages, so anyone reaching out at night is stuck waiting on a reply"></textarea>
+      </div>
+      <div class="field">
+        <label>The outcome <span class="hint">before &rarr; after, what changes for them</span></label>
+        <textarea id="f_outcome" placeholder="e.g. a simple booking page lets people lock in a slot instantly, and you wake up with your day already scheduled"></textarea>
+      </div>
+      <div class="field">
+        <label>The soft ask <span class="hint">small, no-pressure, reversible</span></label>
+        <input id="f_ask" placeholder="e.g. want me to send a quick example of what that could look like for you?">
+      </div>
+
+      <div class="btnrow">
+        <button class="btn btn-primary" onclick="generate()">Generate message &rarr;</button>
+        <button class="btn btn-ghost" onclick="clearForm(false)">Clear fields</button>
+      </div>
+    </div>
+
+    <!-- PREVIEW + HISTORY -->
+    <div>
+      <div class="card" style="margin-bottom:22px">
+        <div class="meta-row">
+          <h2 style="margin:0">Your message<span class="badge" id="chBadge">DM</span></h2>
+          <span class="wordcount" id="wordcount"></span>
+        </div>
+        <div class="preview empty" id="preview">Fill in the fields and click Generate &mdash; your message appears here.</div>
+        <div class="btnrow">
+          <button class="btn btn-primary" onclick="copyMsg()">Copy to clipboard</button>
+          <button class="btn btn-ghost" onclick="saveAndNew()">Save &amp; start new &rarr;</button>
+          <span class="copied-flash" id="copiedFlash">Copied!</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Saved messages <span class="stat">Sent so far: <b id="sentCount">0</b></span></div>
+        <div id="historyList"><div class="empty-state">Nothing saved yet &mdash; generate and save your first message.</div></div>
+        <div class="btnrow" style="margin-top:4px" id="clearAllRow" style="display:none">
+          <button class="btn btn-ghost btn-small" onclick="clearAllHistory()">Clear all history</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>Stored locally in this browser only &mdash; nothing is sent anywhere. Clearing browser data will erase your history, so copy anything important elsewhere if you switch devices.</footer>
+</div>
+
+<script>
+var channel = 'DM';
+var STORAGE_KEY = 'clickclose_dm_history_v1';
+
+function setChannel(ch){
+  channel = ch;
+  document.querySelectorAll('.channel-toggle button').forEach(function(b){
+    b.classList.toggle('active', b.dataset.ch === ch);
+  });
+  document.getElementById('chBadge').textContent = ch;
+}
+
+function endWithPeriod(s){
+  s = (s||'').trim();
+  if(!s) return '';
+  if(!/[.!?]$/.test(s)) s += '.';
+  return s;
+}
+function lower1(s){ return s ? s.charAt(0).toLowerCase() + s.slice(1) : s; }
+function upper1(s){ return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+
+function buildMessage(){
+  var name = document.getElementById('f_name').value.trim();
+  var obs = endWithPeriod(document.getElementById('f_observation').value);
+  var comp = endWithPeriod(document.getElementById('f_compliment').value);
+  var gap = document.getElementById('f_gap').value.trim();
+  var outcome = document.getElementById('f_outcome').value.trim();
+  var ask = document.getElementById('f_ask').value.trim();
+
+  var greeting = channel === 'Email' ? 'Hi' : 'Hey';
+  var line1 = greeting + (name ? ' ' + name : '') + ' — ' + upper1(obs);
+  if(comp) line1 += ' ' + upper1(comp);
+
+  var line2 = '';
+  if(gap || outcome){
+    line2 = 'I noticed ' + lower1(endWithPeriod(gap));
+    if(outcome) line2 += ' ' + upper1(endWithPeriod(outcome));
+  }
+
+  var line3 = ask ? upper1(endWithPeriod(ask)) : '';
+
+  var parts = [line1];
+  if(line2) parts.push(line2);
+  if(line3) parts.push(line3);
+  return parts.join('\n\n');
+}
+
+function generate(){
+  var name = document.getElementById('f_name').value.trim();
+  if(!name){ alert('Add their first name at least — it makes the message feel personal from the first word.'); return; }
+  var msg = buildMessage();
+  var el = document.getElementById('preview');
+  el.textContent = msg;
+  el.classList.remove('empty');
+  updateWordcount(msg);
+}
+
+function updateWordcount(msg){
+  var words = msg.trim() ? msg.trim().split(/\s+/).length : 0;
+  document.getElementById('wordcount').textContent = words + ' words';
+}
+
+function copyMsg(){
+  var el = document.getElementById('preview');
+  if(el.classList.contains('empty') || !el.textContent.trim()){ generate(); }
+  var text = document.getElementById('preview').textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    var flash = document.getElementById('copiedFlash');
+    flash.classList.add('show');
+    setTimeout(function(){ flash.classList.remove('show'); }, 1400);
+  });
+}
+
+function loadHistory(){
+  try{
+    var raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){ return []; }
+}
+function saveHistory(list){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }catch(e){}
+}
+
+function renderHistory(){
+  var list = loadHistory();
+  var wrap = document.getElementById('historyList');
+  document.getElementById('sentCount').textContent = list.length;
+  if(!list.length){
+    wrap.innerHTML = '<div class="empty-state">Nothing saved yet — generate and save your first message.</div>';
+    return;
+  }
+  wrap.innerHTML = '';
+  list.slice().reverse().forEach(function(item, idx){
+    var realIdx = list.length - 1 - idx;
+    var div = document.createElement('div');
+    div.className = 'history-item';
+    div.innerHTML =
+      '<div class="history-head" onclick="toggleHistory('+realIdx+')">' +
+        '<span class="bname">' + escapeHtml(item.business || item.name || 'Untitled') + ' <span class="badge">' + item.channel + '</span></span>' +
+        '<span class="when">' + item.when + '</span>' +
+      '</div>' +
+      '<div class="history-body" id="hbody_'+realIdx+'">' + escapeHtml(item.message) + '</div>' +
+      '<div class="history-actions" id="hactions_'+realIdx+'" style="display:none">' +
+        '<button class="btn btn-ghost btn-small" onclick="copyHistory('+realIdx+')">Copy again</button>' +
+        '<button class="btn btn-ghost btn-small" onclick="deleteHistory('+realIdx+')">Delete</button>' +
+      '</div>';
+    wrap.appendChild(div);
+  });
+}
+function escapeHtml(s){
+  var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML;
+}
+function toggleHistory(idx){
+  var body = document.getElementById('hbody_'+idx);
+  var actions = document.getElementById('hactions_'+idx);
+  var open = body.classList.toggle('open');
+  actions.style.display = open ? 'flex' : 'none';
+}
+function copyHistory(idx){
+  var list = loadHistory();
+  var item = list[idx];
+  if(item) navigator.clipboard.writeText(item.message);
+  var flash = document.getElementById('copiedFlash');
+  flash.classList.add('show');
+  setTimeout(function(){ flash.classList.remove('show'); }, 1400);
+}
+function deleteHistory(idx){
+  var list = loadHistory();
+  list.splice(idx,1);
+  saveHistory(list);
+  renderHistory();
+}
+function clearAllHistory(){
+  if(!confirm('Delete all saved messages? This cannot be undone.')) return;
+  saveHistory([]);
+  renderHistory();
+}
+
+function saveAndNew(){
+  var el = document.getElementById('preview');
+  if(el.classList.contains('empty') || !el.textContent.trim()){ generate(); }
+  var msg = document.getElementById('preview').textContent;
+  if(!msg.trim()) return;
+  var business = document.getElementById('f_business').value.trim() || document.getElementById('f_name').value.trim();
+  var list = loadHistory();
+  list.push({
+    business: business,
+    channel: channel,
+    message: msg,
+    when: new Date().toLocaleString('en-US', {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'})
+  });
+  saveHistory(list);
+  renderHistory();
+  clearForm(true);
+}
+
+function clearForm(keepChannel){
+  ['f_name','f_business','f_observation','f_compliment','f_gap','f_outcome','f_ask'].forEach(function(id){
+    document.getElementById(id).value = '';
+  });
+  var el = document.getElementById('preview');
+  el.textContent = 'Fill in the fields and click Generate — your message appears here.';
+  el.classList.add('empty');
+  document.getElementById('wordcount').textContent = '';
+  document.getElementById('f_name').focus();
+}
+
+renderHistory();
+</script>
+</body>
+</html>
